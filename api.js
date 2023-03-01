@@ -24,6 +24,21 @@ const API = {
       data,
     });
   },
+  login: async (data) => {
+    return await APIRequest({
+      method: "POST",
+      url: getAPIURL("login"),
+      data,
+    });
+  },
+  getOTP: async (phone) => {
+    const response = await APIRequest({
+      method: "GET",
+      url: getAPIURL("otps"),
+    });
+
+    return response.data.filter((r) => r.phone_number === phone).pop().otp;
+  },
 };
 
 module.exports = API;

@@ -24,8 +24,24 @@ const checkAPIConflictResponse = (response, message, code) => {
   );
 };
 
+const checkAPIUnauthorized = (
+  response,
+  message = "Unauthorized",
+  code = "401"
+) => {
+  expect(response.status).toBe(401);
+  expect(typeof response.data).toBe("object");
+  expect(response.data).toEqual(
+    expect.objectContaining({
+      error: expect.stringContaining(message),
+      errorCode: code,
+    })
+  );
+};
+
 module.exports = {
   getAPIURL,
   checkAPIBadRequest,
   checkAPIConflictResponse,
+  checkAPIUnauthorized,
 };
