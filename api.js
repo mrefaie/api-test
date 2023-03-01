@@ -39,6 +39,15 @@ const API = {
 
     return response.data.filter((r) => r.phone_number === phone).pop().otp;
   },
+  me: async (token) => {
+    return await APIRequest({
+      method: "GET",
+      url: getAPIURL("me"),
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
 };
 
 module.exports = API;
